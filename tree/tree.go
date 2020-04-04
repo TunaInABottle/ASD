@@ -36,16 +36,16 @@ func ReadPreOrderTree(elements []string) *Node {
 	return tree
 }
 
-// PrintTreeInOrder puts the keys of the tree in a slice as in order visit,
+// Sort puts the keys of the tree in a slice as in order visit,
 // if print == true, it also prints the slice on file
-func PrintTreeInOrder(tree *Node, print bool) []string {
+func Sort(tree *Node, print bool) []string {
 	var elements []string
 	// saves the elements in a slice
-	appendValues(elements[:0], tree)
+	elements = appendValues(elements, tree)
 	// print, avoid NULL
 	if print == true {
 		for _, val := range elements {
-			if val != "NULL" {
+			if !strings.Contains(val, "NULL") {
 				fmt.Printf("%s ", val)
 			}
 		}
