@@ -1,9 +1,7 @@
 package tree
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"strings"
 )
 
@@ -28,34 +26,31 @@ type Node struct {
 }
 
 // ReadPreOrderTree gets a string written as PreOrder visit and returns a its binary tree
-func ReadPreOrderTree() *Node {
+func ReadPreOrderTree(elements []string) *Node {
 	var tree *Node
-
-	// Read from stdin, put the result in "input" string until the new line
-	reader := bufio.NewReader(os.Stdin)
-	input, _ := reader.ReadString('\n')
-	// Assign to "elements" the values of "input" trimmed by the space
-	elements := strings.Split(input, " ")
 
 	// Populate the tree
 	for _, el := range elements {
 		tree = add(tree, el)
 	}
-
 	return tree
 }
 
-// PrintTreeInOrder Prints the tree as in order visit
-func PrintTreeInOrder(tree *Node) {
+// PrintTreeInOrder puts the keys of the tree in a slice as in order visit,
+// if print == true, it also prints the slice on file
+func PrintTreeInOrder(tree *Node, print bool) []string {
 	var elements []string
 	// saves the elements in a slice
 	appendValues(elements[:0], tree)
 	// print, avoid NULL
-	for _, val := range elements {
-		if val != "NULL" {
-			fmt.Printf("%s ", val)
+	if print == true {
+		for _, val := range elements {
+			if val != "NULL" {
+				fmt.Printf("%s ", val)
+			}
 		}
 	}
+	return elements
 }
 
 // add adds the node to the tree
